@@ -41,5 +41,9 @@ public class Feature {
 	public int getIsGlobal() {
 		return isGlobal;
 	}
+	
+	public long getId(){
+		return id;
+	}
 
 }

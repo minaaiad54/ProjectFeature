@@ -13,4 +13,5 @@ public interface FeatureRepository extends JpaRepository<Feature, Long> {
 
 	Feature findById(long featureId);
 	List<Feature> findByIsGlobal(int isGlobal);
+	Feature findByName(String name);
 }
