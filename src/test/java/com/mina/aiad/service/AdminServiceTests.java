@@ -2,7 +2,7 @@ package com.mina.aiad.service;
 
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,7 @@ public class AdminServiceTests {
 	
 	@Autowired
 	AdminService adminService;
-	
-	
-	
-	
+
 	@Test
 	@DisplayName("Test if new feature is added to the feature repo")
 	public void addFeatureTest()
@@ -60,13 +57,10 @@ public class AdminServiceTests {
 	{
 	
 		Feature f=new Feature("test feature2");
-		featureRepo.save(f);
-		
+		featureRepo.save(f);		
 		User user=new User("testUser", "test", "temp");
-		userRepo.save(user);
-		
+		userRepo.save(user);		
 		adminService.addFeatureToUser(user.getUsername(), f.getId());
-		
 		Assertions.assertNotNull(userFeatureRepo.findByUserId(user.getId()));
 	}
 	
@@ -74,8 +68,7 @@ public class AdminServiceTests {
 	@Test
 	@DisplayName("Test disable feature to user")
 	public void disableFeatureToUserTest()
-	{
-	
+	{	
 		User user=userRepo.findByUsername("testUser");
 		adminService.disableFeatureToUser(user.getUsername(), featureRepo.findByName("test feature2").getId());
 		Assertions.assertTrue(userFeatureRepo.findByUserId(user.getId()).size()==0);
