@@ -9,42 +9,40 @@ the service is implemented as the following-
 User endpoints
 --------------
 GET:
-http://localhost:8080/user/allusers :
+http://localhost:8080/users :
 to list all the users
 
 
 POST:
-http://localhost:8080/user/adduser :
+http://localhost:8080/users :
 to add user
 
 example to user model is { "username":"mina3", "password":"123", "role":"user" }
 
 
 GET:
-http://localhost:8080/user/all/{id} : 
+http://localhost:8080/users/{id}/features : 
 get all the enabled features (a mix of all the globally enabled ones and the ones enabled just for my user) where {id} is the user ID
 
 admin endpoints
 ---------------
 GET :
-http://localhost:8080/admin/all :
+http://localhost:8080/admin/features :
 list all the features
 
 POST :
-http://localhost:8080/admin/addfeature :
+http://localhost:8080/admin/features :
 to add new feature 
 
 PUT :
-http://localhost:8080/admin/switchon/{id} :
+http://localhost:8080/admin/features/{id}:
 switch speific feature to be enabled globally 
 
 PUT :
-http://localhost:8080/admin/switchon/{id}/user/{username} :
-enable feature to user 
+http://localhost:8080/admin/features/{id}/user/{username}/{enable}:
+enable:1 feature to user or disable (enable flag=0) it 
 
-PUT :
-http://localhost:8080/admin/switchoff/{id}/user/{username} :
-disbale feature to user
+
 
 TO-DO
 =====
