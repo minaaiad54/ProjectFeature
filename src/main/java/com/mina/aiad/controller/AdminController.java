@@ -26,7 +26,7 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	@GetMapping("/all")
+	@GetMapping("/features")
 	public ResponseEntity<List<Feature>> getAllFeatures() {
 		try {
 			List<Feature> features = adminService.getAllFeatures();
@@ -40,7 +40,7 @@ public class AdminController {
 		}
 	}
 	
-	@PostMapping("/addfeature")
+	@PostMapping("/features")
 	public ResponseEntity<Feature> createFeature(@RequestBody String name) {
 		try {
 			adminService.addFeature(name);
@@ -50,7 +50,7 @@ public class AdminController {
 		}
 	}
 	
-	@PutMapping("/switchon/{id}")
+	@PutMapping("/features/{id}")
 	public ResponseEntity<Feature> updateFeature(@PathVariable("id") long id) {
 		
 		boolean result=adminService.enableGlobal(id);
@@ -61,10 +61,14 @@ public class AdminController {
 		}
 	}
 
-	@PutMapping("/switchon/{id}/user/{username}")
-	public ResponseEntity<Feature> switchOnUserFeature(@PathVariable("id") long id,@PathVariable("username") String username) {
+	@PutMapping("/features/{id}/user/{username}/{enable}")
+	public ResponseEntity<Feature> switchOnUserFeature(@PathVariable("id") long id,@PathVariable("username") String username,@PathVariable("enable") Integer enable) {
 		
-		boolean result=adminService.addFeatureToUser(username, id);
+		boolean result=false;
+		if(enable==1)
+			result=adminService.addFeatureToUser(username, id);
+		else
+			result=adminService.disableFeatureToUser(username, id);
 		if (result) {
 			return new ResponseEntity<>( HttpStatus.OK);
 		} else {
@@ -72,17 +76,6 @@ public class AdminController {
 		}
 	}
 	
-	
-	@PutMapping("/switchoff/{id}/user/{username}")
-	public ResponseEntity<Feature> switchOffUserFeature(@PathVariable("id") long id,@PathVariable("username") String username) {
-		
-		boolean result=adminService.disableFeatureToUser(username, id);
-		if (result) {
-			return new ResponseEntity<>( HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
 	
 	
 }

@@ -19,14 +19,13 @@ import com.mina.aiad.service.UserService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("/adduser")
-	public ResponseEntity<User> createFeature(@RequestBody User user) {
+	@PostMapping("/users")
+	public ResponseEntity<User> createUser(@RequestBody User user) {
 		try {
 			User cuser=userService.createUser(user);
 			return new ResponseEntity<User>(cuser,HttpStatus.CREATED);
@@ -35,7 +34,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/all/{id}")
+	@GetMapping("/users/{id}/features")
 	public ResponseEntity<List<Feature>> getAllFeatures(@PathVariable("id") long id) {
 		try {
 			List<Feature> features = userService.getAllFeatures(id);
@@ -48,7 +47,7 @@ public class UserController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@GetMapping("/allusers")
+	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllusers() {
 		try {
 			List<User> users = userService.getAll();
